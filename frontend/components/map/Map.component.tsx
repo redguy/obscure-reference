@@ -1,24 +1,36 @@
-import React from "react";
-import ReactMapboxGl from "react-mapbox-gl";
+import React, { useState } from "react";
+import MapGL, { ViewState } from "react-map-gl";
 
 import MapWrapper from "./MapWrapper.styled";
 
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10";
 
-const Map = ReactMapboxGl({
-  accessToken: String(process.env.MAPBOX_TOKEN),
-});
+const MapComponent = () => {
+  const [viewport, setViewport] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+    longitude: 14.425,
+    latitude: 50.055,
+    zoom: 12,
+  });
 
-const MapComponent = () => (
-  <MapWrapper>
-    <Map
-      containerStyle={{
-        height: "100%",
-        width: "100%",
-      }}
-      style={MAP_STYLE}
-    />
-  </MapWrapper>
-);
+  const handleViewportChange = (viewState: ViewState): void => {
+    setViewport({
+      ...viewport,
+      ...viewState,
+    });
+  };
+
+  return (
+    <MapWrapper>
+      <MapGL
+        {...viewport}
+        mapboxApiAccessToken={String(process.env.MAPBOX_TOKEN)}
+        mapStyle={MAP_STYLE}
+        onViewportChange={handleViewportChange}
+      />
+    </MapWrapper>
+  );
+};
 
 export default MapComponent;
