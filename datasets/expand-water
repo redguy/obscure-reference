@@ -1,0 +1,10 @@
+#! /usr/bin/env python3
+
+import geopandas
+
+SIZE = 25
+water_raw_file = "water-raw.geojson"
+
+wr = geopandas.read_file(water_raw_file)
+wr['geometry'] = wr.geometry.buffer(0.00045)
+wr.to_file('water.geojson', driver="GeoJSON")

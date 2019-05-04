@@ -1,0 +1,27 @@
+#! /bin/bash
+
+set -e
+
+WIDTH=4096
+HEIGHT=4096
+
+readonly INPUT="$1"
+
+
+fail() {
+    echo $1
+    exit 1
+}
+
+[ ! -f "$INPUT" ] && fail "'${INPUT}' does not exists."
+[[ "$INPUT" == *.geojson ]] || fail "'${INPUT}' must have an .geojson extension."
+
+TIFF=$(echo "$INPUT" | sed -e 's/.geojson$/.tiff/')
+OUT=$(echo "$INPUT" | sed -e 's/.geojson$/.png/')
+
+# those zeros after width and heigt are there to make first image bigger
+# some geojsons are way outside of prague boundaries and we need this to keep some
+# resolution
+gdal_rasterize -ts ${WIDTH}0 ${HEIGHT}0 -ot byte  -burn 0 -a_nodata 255 ${INPUT} ${TIFF}
+gdalwarp -te  14.25 49.98 14.6 50.15 -multi -ts $WIDTH $HEIGHT $TIFF -overwrite ${TIFF} ${TIFF}
+convert ${TIFF} ${OUT}
