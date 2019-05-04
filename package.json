@@ -8,5 +8,5 @@
     "node": ">=10",
     "yarn": "^1.15.2"
   },
-  "workspaces": ["frontend"]
+  "workspaces": ["frontend", "libs"]
 }
