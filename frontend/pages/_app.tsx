@@ -1,40 +1,41 @@
-import React from 'react'
-import App, { Container, DefaultAppIProps, NextAppContext } from 'next/app'
-import Head from 'next/head'
-import { Global } from '@emotion/core';
+import { Global } from "@emotion/core";
+import App, { Container, DefaultAppIProps, NextAppContext } from "next/app";
+import Head from "next/head";
+import React from "react";
 
-import globalStyles from '../styles/global.styles';
-import isDevelopment from '../utils/isDevelopment';
+import globalStyles from "../styles/global.styles";
+import isDevelopment from "../utils/isDevelopment";
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }: NextAppContext): Promise<DefaultAppIProps> {
-    let pageProps = {}
+  public static async getInitialProps({ Component, ctx }: NextAppContext): Promise<DefaultAppIProps> {
+    let pageProps = {};
 
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx)
+      pageProps = await Component.getInitialProps(ctx);
     }
 
     return { pageProps };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     if (isDevelopment()) {
       return;
     }
 
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', async () => {
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", async () => {
         try {
-          await navigator.serviceWorker.register('/service.worker.js');
+          await navigator.serviceWorker.register("/service.worker.js");
         } catch (err) {
-          console.error('ServiceWorker registration failed.', err);
+          // tslint:disable-next-line
+          console.error("ServiceWorker registration failed.", err);
         }
       });
     }
   }
 
-  render() {
-    const { Component, pageProps } = this.props
+  public render() {
+    const { Component, pageProps } = this.props;
 
     return (
       <React.Fragment>
@@ -52,8 +53,8 @@ class MyApp extends App {
           <Component {...pageProps} />
         </Container>
       </React.Fragment>
-    )
+    );
   }
 }
 
-export default MyApp
+export default MyApp;

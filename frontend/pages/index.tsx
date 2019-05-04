@@ -1,11 +1,11 @@
-import React from 'react';
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
+import React from "react";
 
 const Map = dynamic(
-  () => import('../components/map'),
+  () => import("../components/map"),
   {
-    ssr: false
-  }
+    ssr: false,
+  },
 );
 
 const Homepage = () => (

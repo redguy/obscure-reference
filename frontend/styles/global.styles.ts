@@ -1,5 +1,5 @@
-import { css } from '@emotion/core';
-import emotionReset from 'emotion-reset';
+import { css } from "@emotion/core";
+import emotionReset from "emotion-reset";
 
 const globalStyles = css`
   ${emotionReset}

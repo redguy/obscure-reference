@@ -1,1 +1,1 @@
-declare module 'emotion-reset';
+declare module "emotion-reset";

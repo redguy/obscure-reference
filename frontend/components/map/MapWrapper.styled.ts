@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 const MapWrapper = styled.div`
   height: 100vh;
@@ -6,4 +6,3 @@ const MapWrapper = styled.div`
 `;
 
 export default MapWrapper;
-
