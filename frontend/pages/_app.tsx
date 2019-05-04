@@ -41,7 +41,7 @@ class MyApp extends App {
       <React.Fragment>
         {!isDevelopment() && (
           <Head>
-            <link rel="icon" type="image/png" href="/static/images/icon-192.png" />
+            <link rel="icon" type="image/png" href="/static/images/icon-64.png" />
             <link rel="manifest" href="/manifest.json" />
             <title>Zenbox</title>
           </Head>
