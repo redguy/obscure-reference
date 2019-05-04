@@ -1,16 +1,10 @@
 {
-  "name": "obscure-reference",
+  "name": "frontend",
   "version": "0.0.0",
   "description": "HackPrague 2019 winning project",
   "main": "dist/index.js",
-  "repository": "git@github.com:redguy/obscure-reference.git",
-  "author": "Karel Škopek <kontakt@karelskopek.cz>",
-  "license": "MIT",
+  "license": "BSD 2-Clause",
   "private": true,
-  "engines": {
-    "node": ">=10",
-    "yarn": "^1.15.2"
-  },
   "dependencies": {
     "@babel/core": "7.4.4",
     "@emotion/core": "10.0.10",

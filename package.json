@@ -1,0 +1,12 @@
+{
+  "name": "obscure-reference",
+  "version": "0.0.0",
+  "repository": "git@github.com:redguy/obscure-reference.git",
+  "license": "BSD 2-Clause",
+  "private": true,
+  "engines": {
+    "node": ">=10",
+    "yarn": "^1.15.2"
+  },
+  "workspaces": ["frontend"]
+}
