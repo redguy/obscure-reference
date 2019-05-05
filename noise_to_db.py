@@ -31,6 +31,7 @@ file_name = "gml/HM_Ekola_ADP_pasma_den_p.gml"
 
 noise = geopandas.read_file(file_name, layer=0)
 
+i = 0
 for index, row in noise.iterrows():
     polygon = json.loads(geopandas.GeoSeries(row['geometry']).to_json())
     polygon['value'] = (row['DB_LO'] + row['DB_HI']) / 2
@@ -45,5 +46,11 @@ for index, row in noise.iterrows():
     ]
     cursor.execute("insert into polygons (layer, lb_lng, lb_lat, rt_lng, rt_lat, polyjson) values (?, ?, ?, ?, ?, ?)",
                    sql_params)
+
+    i+=1
+    if i%1000 == 0:
+        conn.commit()
+        print(f"Commited {i}")
+
 
 conn.commit()
