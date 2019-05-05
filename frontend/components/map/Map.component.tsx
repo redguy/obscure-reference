@@ -5,7 +5,11 @@ import MapWrapper from "./MapWrapper.styled";
 
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10";
 
-const MapComponent = () => {
+interface IProps {
+  dimmed: boolean;
+}
+
+const MapComponent = ({ dimmed }: IProps) => {
   const [viewport, setViewport] = useState({
     height: window.innerHeight,
     width: window.innerWidth,
@@ -22,7 +26,7 @@ const MapComponent = () => {
   };
 
   return (
-    <MapWrapper>
+    <MapWrapper dimmed={dimmed}>
       <MapGL
         {...viewport}
         mapboxApiAccessToken={String(process.env.MAPBOX_TOKEN)}

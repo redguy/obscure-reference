@@ -1,15 +1,17 @@
 import styled from "@emotion/styled";
 
-const MapWrapper = styled.div`
-  height: 100vh;
-  width: 100vw;
+interface IProps {
+  dimmed: boolean;
+}
 
+const MapWrapper = styled.div<IProps>`
   bottom: 0;
   left: 0;
-  opacity: 0.2;
+  opacity: ${props => props.dimmed ? 0.2 : 1};
   position: fixed;
   right: 0;
   top: 0;
+  transition: all 1s ease;
   z-index: 0;
 `;
 
