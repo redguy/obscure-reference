@@ -37,7 +37,7 @@ const Wizard = () => {
           <CardList>
             <BackButton onClick={() => setStep(Step.EXPERIENCES)} />
 
-            {places.map((place) => (
+            {places.filter((place) => place.experience === selectedExperience.id).map((place) => (
               <PlaceCard
                 key={[place.position.longitude, place.position.latitude].join("_")}
                 {...place}

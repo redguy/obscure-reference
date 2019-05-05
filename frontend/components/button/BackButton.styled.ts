@@ -9,6 +9,7 @@ const BackButton = styled.button`
   cursor: pointer;
   height: 3rem;
   margin-bottom: 0.5rem;
+  margin-top: 1rem;
   outline: none;
   padding: 0.75rem;
   transition: all 200ms ease;
