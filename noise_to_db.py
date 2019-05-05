@@ -37,15 +37,18 @@ for index, row in noise.iterrows():
     polygon['value'] = (row['DB_LO'] + row['DB_HI']) / 2
 
     sql_params = [
-        'test',  # layer
+        'silent',  # layer
         row['geometry'].bounds[0],
         row['geometry'].bounds[1],
         row['geometry'].bounds[2],
         row['geometry'].bounds[3],
-        json.dumps(polygon)
+        json.dumps(polygon),
+        polygon['value']
     ]
-    cursor.execute("insert into polygons (layer, lb_lng, lb_lat, rt_lng, rt_lat, polyjson) values (?, ?, ?, ?, ?, ?)",
+    if polygon['value'] <= 50:
+        cursor.execute("insert into polygons (layer, lb_lng, lb_lat, rt_lng, rt_lat, polyjson, noise) values (?, ?, ?, ?, ?, ?, ?)",
                    sql_params)
+        print(sql_params)
 
     i+=1
     if i%1000 == 0:
