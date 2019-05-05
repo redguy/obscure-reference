@@ -24,7 +24,7 @@ enum Step {
 }
 
 const Wizard = () => {
-  const [step, setStep] = useState<Step>(Step.PLACES);
+  const [step, setStep] = useState<Step>(Step.WELCOME);
   const [selectedExperience, setExperience] = useState<IExperience>(experiences[0]);
   const position = usePosition();
 
@@ -32,7 +32,7 @@ const Wizard = () => {
     <div>
       {step === Step.PLACES && (
         <Content>
-          <Heading>{selectedExperience.plural} nearby</Heading>
+          <Heading color={selectedExperience.color}>{selectedExperience.plural} nearby</Heading>
 
           <CardList>
             <BackButton onClick={() => setStep(Step.EXPERIENCES)} />
@@ -41,6 +41,7 @@ const Wizard = () => {
               <PlaceCard
                 key={[place.position.longitude, place.position.latitude].join("_")}
                 {...place}
+                color={selectedExperience.color}
                 onClick={() => {
                   setStep(Step.WELCOME);
                   window.open(`https://www.google.com/maps/@${place.position.latitude},${place.position.longitude},16z`, "_blank");
