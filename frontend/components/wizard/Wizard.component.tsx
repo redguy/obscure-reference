@@ -6,6 +6,8 @@ import LinkButton from "../button/LinkButton.styled";
 import CardList from "../cards/CardList.styled";
 import { experiences, IExperience } from "../cards/Experience.constants";
 import ExperienceCard from "../cards/ExperienceCard.component";
+import { places } from "../cards/Place.constants";
+import PlaceCard from "../cards/PlaceCard.component";
 import Illustration from "../illustration/Illustration.styled";
 import Content from "../layout/Content.styled";
 import Footer from "../layout/Footer.styled";
@@ -17,11 +19,12 @@ import Text from "../typography/Text.styled";
 enum Step {
   WELCOME,
   EXPERIENCES,
+  PLACE,
   PLACES,
 }
 
 const Wizard = () => {
-  const [step, setStep] = useState<Step>(Step.EXPERIENCES);
+  const [step, setStep] = useState<Step>(Step.PLACES);
   const [selectedExperience, setExperience] = useState<IExperience>(experiences[0]);
   const position = usePosition();
 
@@ -30,6 +33,21 @@ const Wizard = () => {
       {step === Step.PLACES && (
         <Content>
           <Heading>{selectedExperience.plural} nearby</Heading>
+
+          <CardList>
+            <BackButton onClick={() => setStep(Step.EXPERIENCES)} />
+
+            {places.map((place) => (
+              <PlaceCard
+                key={[place.position.longitude, place.position.latitude].join("_")}
+                {...place}
+                onClick={() => {
+                  setStep(Step.WELCOME);
+                  window.open(`https://www.google.com/maps/@${place.position.latitude},${place.position.longitude},16z`, "_blank");
+                }}
+              />
+            ))}
+          </CardList>
         </Content>
       )}
 

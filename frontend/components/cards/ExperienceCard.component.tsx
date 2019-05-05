@@ -9,7 +9,9 @@ interface IProps extends IExperience {
 
 const ExperienceCard = ({
   color,
+  count,
   description,
+  duration,
   imageUrl,
   onClick,
   title,
@@ -18,7 +20,7 @@ const ExperienceCard = ({
     <div>
       <h3>{title}</h3>
       <p>{description}</p>
-      <span>1 nearby • 30 min</span>
+      <span>{count} nearby • {duration} min</span>
     </div>
 
     <img src={imageUrl} />
