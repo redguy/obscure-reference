@@ -22,6 +22,6 @@ OUT=$(echo "$INPUT" | sed -e 's/.geojson$/.png/')
 # those zeros after width and heigt are there to make first image bigger
 # some geojsons are way outside of prague boundaries and we need this to keep some
 # resolution
-gdal_rasterize -ts ${WIDTH}0 ${HEIGHT}0 -ot byte  -burn 0 -a_nodata 255 ${INPUT} ${TIFF}
+gdal_rasterize -ts ${WIDTH}0 ${HEIGHT}0 -ot byte  -burn 255 -a_nodata 0 ${INPUT} ${TIFF}
 gdalwarp -te  14.25 49.98 14.6 50.15 -multi -ts $WIDTH $HEIGHT $TIFF -overwrite ${TIFF} ${TIFF}
 convert ${TIFF} ${OUT}

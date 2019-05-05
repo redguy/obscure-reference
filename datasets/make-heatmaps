@@ -1,0 +1,58 @@
+#! /usr/bin/env python3
+
+import os, sys
+from PIL import Image
+
+source = {
+    "water" : {
+        "file": "water.png",
+    },
+    "park" : {
+        "file": "parks.png",
+    },
+    "noise": {
+        "file": "noise.png"
+    }
+}
+
+profiles = {
+    "quiet": {
+        "water": 0.1,
+        "park": 0.3,
+        "noise": 1
+    },
+    "balanced": {
+        "water": 1,
+        "park": 1,
+        "noise": 1
+    },
+    "splashy": {
+        "water": 1,
+        "park": 0.5,
+        "noise": 0.1
+    },
+}
+
+def load_sources():
+    for k in source:
+        print("Loading", k)
+        source[k]["image"] = Image.open(source[k]["file"])
+
+
+def make_heatmap(profile_name):
+    profile = profiles[profile_name]
+    (width, height) = source["water"]["image"].size
+    result = Image.new("RGB", (width, height))
+    scale = 1.0 * (profile["water"] + profile["park"] + profile["noise"])
+    imgs = {}
+    for s in source:
+        imgs[s] = source[s]["image"]
+    for x in range(0, width):
+        print(x)
+        for y in range(0, height):
+            v = 0
+            for s in source:
+                v = v + imgs[s].getpixel((x,y)) * 1.0 * profile[s]
+            v = int(v / scale)
+            result.putpixel((x,y), (v,v,v))
+    result.save(profile_name + ".png")
