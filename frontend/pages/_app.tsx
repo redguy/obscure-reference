@@ -39,11 +39,15 @@ class MyApp extends App {
 
     return (
       <React.Fragment>
+        <Head>
+          <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:400,500,700,800" rel="stylesheet" />
+          <link rel="icon" type="image/png" href="/static/images/icon-64.png" />
+          <title>Zenspot</title>
+        </Head>
+
         {!isDevelopment() && (
           <Head>
-            <link rel="icon" type="image/png" href="/static/images/icon-64.png" />
             <link rel="manifest" href="/manifest.json" />
-            <title>Zenbox</title>
           </Head>
         )}
 

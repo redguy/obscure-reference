@@ -1,4 +1,4 @@
-# Zenbox 5000 frontend
+# Zenspot frontend
 
 ## Install
 
