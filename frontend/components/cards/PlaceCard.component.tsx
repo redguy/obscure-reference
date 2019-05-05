@@ -9,9 +9,12 @@ interface IProps extends IPlace {
 }
 
 const PlaceCard = ({
+  duration,
   experiences,
+  length,
   onClick,
   title,
+  walkDuration,
 }: IProps) => {
   const color = ExperiencesColors[experiences[0] || Experience.JOYFUL];
 
@@ -19,6 +22,8 @@ const PlaceCard = ({
     <PlaceCardStyled color={color} onClick={onClick}>
       <div>
         <h3>{title}</h3>
+        <span>{duration} minute experience</span>
+        <p>{length} km • a {walkDuration} min walk</p>
       </div>
     </PlaceCardStyled>
   );
